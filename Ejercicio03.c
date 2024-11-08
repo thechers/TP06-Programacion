@@ -6,7 +6,7 @@ void mezclarCadenas(char *cad1, char *cad2, int num);
 int main()
 {
 	char *cad1,*cad2;
-	int num,cont=0,cont2=0,tama=20;
+	int num,contador=0,contador2=0,tama=20;
 	
 	cad1 = (char *)malloc(tama * sizeof(char));
 	cad2 = (char *)malloc(tama * sizeof(char));
@@ -20,20 +20,33 @@ int main()
 	printf("Ingrese un numero: \n");
 	scanf("%d", &num);
 
-	mezclarCadenas(cad1,cad2,num);
+	while(*cad1 != '\0'){
+		contador++;
+		cad1++;
+	}	
+		cad1 -= contador;
+		char *cadena1 = (char *)realloc(cad1,contador * sizeof(char));
+		cad1 = cadena1;
+		
 
-	
+	while(*cad2 != '\0'){
+		contador2++;
+		cad2++;
+	}
+		cad2 -= contador2;
+		char *cadena2 = (char *)realloc(cad2,contador * sizeof(char));
+		cad2 = cadena2;
+
+		mezclarCadenas(cad1,cad2,num);
 	return 0;
 }
-
 
 void mezclarCadenas(char *cad1, char *cad2, int num)
 {
 	char *cadAux;
-	int tama=30;
+	int tama=30,i,cont = 0,cont2=0;
+	
 	cadAux = (char *)malloc(tama * sizeof(char));
-
-	int i,cont = 0,cont2=0;
 
 	for (int i = 0; i <= num; i++)
 	{
