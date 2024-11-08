@@ -1,34 +1,38 @@
 #include <stdio.h>
-#define TAMA 100
+#include <stdlib.h>
 void mezclarCadenas(char *cad1, char *cad2, int num);
 
 
 int main()
 {
-	char cadena1[TAMA],cadena2[TAMA],*cad1,*cad2;
-	int num;
-
+	char *cad1,*cad2;
+	int num,cont=0,cont2=0,tama=20;
+	
+	cad1 = (char *)malloc(tama * sizeof(char));
+	cad2 = (char *)malloc(tama * sizeof(char));
+	
 	printf("Ingrese la primera frase: \n");
 	fflush(stdin);
-	gets(cadena1);
+	gets(cad1);
 	printf("Ingrese la segunda frase: \n");
 	fflush(stdin);
-	gets(cadena2);
+	gets(cad2);
 	printf("Ingrese un numero: \n");
 	scanf("%d", &num);
 
-	cad1 = cadena1;
-	cad2 = cadena2;
-
 	mezclarCadenas(cad1,cad2,num);
 
+	
 	return 0;
 }
 
 
 void mezclarCadenas(char *cad1, char *cad2, int num)
 {
-	char cadAux[TAMA];
+	char *cadAux;
+	int tama=30;
+	cadAux = (char *)malloc(tama * sizeof(char));
+
 	int i,cont = 0,cont2=0;
 
 	for (int i = 0; i <= num; i++)
@@ -54,6 +58,10 @@ void mezclarCadenas(char *cad1, char *cad2, int num)
 		cont2++;
 	}
 
+    char *aux = (char *)realloc(cadAux,(cont2+1)*sizeof(char));
+
+    cadAux = aux;
+
 	cadAux[cont2+1] = '\0';
 
 	printf("La frase modificada es: \n");
@@ -63,4 +71,7 @@ void mezclarCadenas(char *cad1, char *cad2, int num)
 		printf("%c", cadAux[i]);
 	}
 
+	free(cad1);
+	free(cad2);
+	free(cadAux);
 }
